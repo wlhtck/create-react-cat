@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Loader from 'react-loader-spinner'
 import './App.css';
 import { connect } from 'react-redux';
-import { fetchCat } from  './ducks/cat/actions';
-import { getCatUrl, getCatLoading } from './ducks/cat/selectors';
+import { fetchCat, fetchCatError } from  './ducks/cat/actions';
+import { getCatUrl, getCatLoading, getCatError } from './ducks/cat/selectors';
 
 class App extends Component {
   componentWillMount() {
@@ -11,15 +11,17 @@ class App extends Component {
   }
 
   render() {
-    const { loading, onLoadCat, src } = this.props
+    const { loading, onLoadCat, makeBadRequest, src, error } = this.props
     return (
       <div className="App">
         <header className="App-header">
-          <img src={src} className="App-logo" alt="logo" />
-          <p>
-            {loading ? 'Loading cat...' : 'Cat loaded'}
-          </p>
-          <button onClick={onLoadCat}>Load Cat</button>
+          <div className="cat-container">
+            {loading && <Loader type="Hearts" color="#FFC0CB" height={500} width={500} />}
+            {!loading && error}
+            {!loading && !error && <img src={src} alt="cat" />}
+          </div>
+          <button className="button" onClick={onLoadCat}>Load Cat</button>
+          <button className="button" onClick={makeBadRequest}>Load Cat (error)</button>
         </header>
       </div>
     );
@@ -27,7 +29,6 @@ class App extends Component {
 }
 
 export default connect(
-  (state) => ({ loading: getCatLoading(state), src: getCatUrl(state) }),
-  { onLoadCat: fetchCat }
+  (state) => ({ loading: getCatLoading(state), src: getCatUrl(state), error: getCatError(state) }),
+  { onLoadCat: fetchCat, makeBadRequest: fetchCatError }
 )(App);
-// export default App;

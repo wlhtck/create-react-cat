@@ -2,11 +2,12 @@ import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import cat from './cat/reducer';
-import {fetchCatSaga} from './cat/sagas';
+import { fetchCatSaga, fetchCatErrorSaga } from './cat/sagas';
 
 function* saga() {
    yield all([
      fetchCatSaga(),
+     fetchCatErrorSaga(),
    ]);
 }
 

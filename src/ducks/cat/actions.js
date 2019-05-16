@@ -1,7 +1,11 @@
-import { FETCH_CAT, RECEIVE_CAT_SUCCESS, RECEIVE_CAT_FAILURE } from './consts'
+import { FETCH_CAT, RECEIVE_CAT_SUCCESS, RECEIVE_CAT_FAILURE, FETCH_CAT_ERROR } from './consts'
 
 export const fetchCat = () => ({
   type: FETCH_CAT,
+});
+
+export const fetchCatError = () => ({
+  type: FETCH_CAT_ERROR,
 });
 
 export const receiveCatSuccess = (data) => ({
