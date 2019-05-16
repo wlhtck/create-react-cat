@@ -21,7 +21,7 @@ export function* onFetchCatError() {
     const response = yield call(axios.get, ['https://api.thecatapi.com/v1/images']);
     yield put(receiveCatSuccess(response.data[0]));
   } catch(e) {
-    // yield put(receiveCatFailure('There was a problem fetching a cat.'));
+    yield put(receiveCatFailure('There was a problem fetching a cat.'));
   }
 }
 
