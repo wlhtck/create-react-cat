@@ -1,12 +1,12 @@
-import { FETCH_CAT, FETCH_CAT_ERROR, RECEIVE_CAT_SUCCESS, RECEIVE_CAT_FAILURE } from './consts'
+import { REQUEST_CAT, REQUEST_CAT_ERROR, RECEIVE_CAT_SUCCESS, RECEIVE_CAT_FAILURE } from './consts'
 
 export default (
   state = { data: {}, error: null, loading: false },
   { type, data, error }
 ) => {
   switch (type) {
-    case FETCH_CAT:
-    case FETCH_CAT_ERROR:
+    case REQUEST_CAT:
+    case REQUEST_CAT_ERROR:
       return { ...state, error: null, loading: true };
     case RECEIVE_CAT_SUCCESS:
       return { ...state, data, error: null, loading: false };

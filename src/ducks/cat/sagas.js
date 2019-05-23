@@ -1,34 +1,12 @@
-import { takeLatest, put, call, delay } from 'redux-saga/effects';
-import { FETCH_CAT, FETCH_CAT_ERROR } from './consts';
-import { receiveCatSuccess, receiveCatFailure } from './actions';
-import axios from 'axios'
+import { takeLatest } from 'redux-saga/effects';
+import { REQUEST_CAT, REQUEST_CAT_ERROR } from './consts';
+import { fetchCat, fetchCatError } from './effects';
 
-function* onFetchCat() {
-  try {
-    // API Request
-    yield delay(1000)
-    const response = yield call(axios.get, ['https://api.thecatapi.com/v1/images/search']);
-    yield put(receiveCatSuccess(response.data[0]));
-  } catch(e) {
-    yield put(receiveCatFailure('There was a problem fetching a cat.'));
-  }
+export function* requestCatSaga() {
+  console.log('requestCatSaga')
+  yield takeLatest(REQUEST_CAT, fetchCat);
 }
 
-export function* onFetchCatError() {
-  try {
-    // API Request
-    yield delay(1000)
-    const response = yield call(axios.get, ['https://api.thecatapi.com/v1/images']);
-    yield put(receiveCatSuccess(response.data[0]));
-  } catch(e) {
-    yield put(receiveCatFailure('There was a problem fetching a cat.'));
-  }
-}
-
-export function* fetchCatSaga() {
-  yield takeLatest(FETCH_CAT, onFetchCat);
-}
-
-export function* fetchCatErrorSaga() {
-  yield takeLatest(FETCH_CAT_ERROR, onFetchCatError);
+export function* requestCatErrorSaga() {
+  yield takeLatest(REQUEST_CAT_ERROR, fetchCatError);
 }

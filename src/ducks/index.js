@@ -1,27 +1,38 @@
 import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import {
+  createStore, combineReducers, applyMiddleware, compose,
+} from 'redux';
 import cat from './cat/reducer';
-import { fetchCatSaga, fetchCatErrorSaga } from './cat/sagas';
+import dog from './dog/reducer';
+import { requestCatSaga, requestCatErrorSaga } from './cat/sagas';
+import { requestDogSaga, requestDogErrorSaga } from './dog/sagas';
 
-function* saga() {
-   yield all([
-     fetchCatSaga(),
-     fetchCatErrorSaga(),
-   ]);
-}
+export default (preloadedState = undefined, composeEnhancers = compose) => {
+  function* saga() {
+    yield all([
+      requestCatSaga(),
+      requestCatErrorSaga(),
+      requestDogSaga(),
+      requestDogErrorSaga(),
+    ]);
+  }
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const sagaMiddleware = createSagaMiddleware();
-const reducer = combineReducers({
-  cat,
-});
+  const sagaMiddleware = createSagaMiddleware();
+  const reducer = combineReducers({
+    cat,
+    dog,
+  });
 
-export default createStore(
-  reducer,
-  composeEnhancers(
-    applyMiddleware(sagaMiddleware),
-  ),
-);
+  const store = createStore(
+    reducer,
+    preloadedState,
+    composeEnhancers(
+      applyMiddleware(sagaMiddleware),
+    ),
+  );
 
-sagaMiddleware.run(saga);
+  store.sagas = sagaMiddleware.run(saga);
+
+  return store;
+};

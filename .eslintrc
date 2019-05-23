@@ -1,0 +1,21 @@
+{
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "plugins": ["react"],
+    "env": {
+      "browser": true,
+      "jest": true,
+      "es6": true,
+      "node": true
+    },
+    "globals": {
+      "describe": true,
+      "before": true,
+      "it": true,
+      "expect": true
+    },
+    "rules": {
+      "arrow-parens": ["error", "always"],
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": ["test/**/*", "**/*.test.js", "**/*.stories.jsx"]}]
+    }
+}
