@@ -1,5 +1,5 @@
 import React from 'react';
-import useCatApi from './hooks/uuseCatApi'
+import useCatApi from './hooks/useCatApi'
 
 const AppContainer = ({Component}) => {
   const {requestCat, src, loading} = useCatApi();
