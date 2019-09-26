@@ -1,7 +1,7 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {useRequest} from './useRequest';
-import {getCatUrl, getCatLoading} from './ducks/cat/selectors';
-import {fetchCat} from './ducks/cat/actions';
+import useRequest from './useRequest';
+import {getCatUrl, getCatLoading} from '../ducks/cat/selectors';
+import {fetchCat} from '../ducks/cat/actions';
 
 const useCatApi = () => {
   const src = useSelector(getCatUrl);

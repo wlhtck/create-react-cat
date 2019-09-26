@@ -1,4 +1,4 @@
-import {useEffect} 'react-redux';
+import {useEffect} from 'react';
 
 const useRequest = (request, data) => {
   useEffect(() => {
