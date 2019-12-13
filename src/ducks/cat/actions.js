@@ -1,4 +1,6 @@
-import { REQUEST_CAT, RECEIVE_CAT_SUCCESS, RECEIVE_CAT_FAILURE, REQUEST_CAT_ERROR } from './consts'
+import {
+  REQUEST_CAT, RECEIVE_CAT_SUCCESS, RECEIVE_CAT_FAILURE, REQUEST_CAT_ERROR,
+} from './consts';
 
 export const requestCat = () => ({
   type: REQUEST_CAT,
